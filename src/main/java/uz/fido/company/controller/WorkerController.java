@@ -19,30 +19,44 @@ public class WorkerController {
     @PostMapping("/addWorker")
     public HttpEntity<ApiResponce> addWorker(@RequestBody WorkerDto workerDto) {
         ApiResponce apiResponce = workerService.addWorker(workerDto);
+        if (apiResponce.isSuccess())
+            return ResponseEntity.status(HttpStatus.OK).body(apiResponce);
+
         return ResponseEntity.status(HttpStatus.CONFLICT).body(apiResponce);
     }
 
     @GetMapping("/getOneWorker/{id}")
     public HttpEntity<ApiResponce> getOneWorker(@PathVariable Integer id) {
-        ApiResponce oneWorker = workerService.getOneWorker(id);
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(oneWorker);
+        ApiResponce apiResponce = workerService.getOneWorker(id);
+        if (apiResponce.isSuccess())
+            return ResponseEntity.status(HttpStatus.OK).body(apiResponce);
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(apiResponce);
     }
 
     @GetMapping("/getAllWorker")
     public HttpEntity<ApiResponce> getAllWorker() {
-        ApiResponce allAddress = workerService.getAllWorker();
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(allAddress);
+        ApiResponce apiResponce = workerService.getAllWorker();
+        if (apiResponce.isSuccess())
+            return ResponseEntity.status(HttpStatus.OK).body(apiResponce);
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(apiResponce);
     }
 
     @PutMapping("/updateWorker/{id}")
     public HttpEntity<ApiResponce> updateWorker(@PathVariable Integer id, @RequestBody WorkerDto workerDto) {
         ApiResponce apiResponce = workerService.updateWorker(id, workerDto);
+        if (apiResponce.isSuccess())
+            return ResponseEntity.status(HttpStatus.OK).body(apiResponce);
+
         return ResponseEntity.status(HttpStatus.CONFLICT).body(apiResponce);
     }
 
     @DeleteMapping("/deleteWorker/{id}")
     public HttpEntity<ApiResponce> deleteWorker(@PathVariable Integer id) {
         ApiResponce apiResponce = workerService.deleteWorker(id);
+        if (apiResponce.isSuccess())
+            return ResponseEntity.status(HttpStatus.OK).body(apiResponce);
+
         return ResponseEntity.status(HttpStatus.CONFLICT).body(apiResponce);
     }
 }

@@ -19,30 +19,45 @@ public class DepartmentController {
     @PostMapping("/addDepartment")
     public HttpEntity<ApiResponce> addDepartment(@RequestBody DepartmentDto departmentDto) {
         ApiResponce apiResponce = departmentService.addDepartment(departmentDto);
+        if (apiResponce.isSuccess())
+            return ResponseEntity.status(HttpStatus.OK).body(apiResponce);
+
         return ResponseEntity.status(HttpStatus.CONFLICT).body(apiResponce);
     }
 
     @GetMapping("/getOneDepartment/{id}")
     public HttpEntity<ApiResponce> getOneDepartment(@PathVariable Integer id) {
-        ApiResponce oneDepartment = departmentService.getOneDepartment(id);
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(oneDepartment);
+        ApiResponce apiResponce = departmentService.getOneDepartment(id);
+        if (apiResponce.isSuccess())
+            return ResponseEntity.status(HttpStatus.OK).body(apiResponce);
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(apiResponce);
     }
 
     @GetMapping("/getAllDepartment")
     public HttpEntity<ApiResponce> getAllDepartment() {
-        ApiResponce allAddress = departmentService.getAllDepartment();
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(allAddress);
+        ApiResponce apiResponce = departmentService.getAllDepartment();
+        if (apiResponce.isSuccess())
+            return ResponseEntity.status(HttpStatus.OK).body(apiResponce);
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(apiResponce);
     }
 
     @PutMapping("/updateDepartment/{id}")
     public HttpEntity<ApiResponce> updateDepartment(@PathVariable Integer id, @RequestBody DepartmentDto departmentDto) {
         ApiResponce apiResponce = departmentService.updateDepartment(id, departmentDto);
+        if (apiResponce.isSuccess())
+            return ResponseEntity.status(HttpStatus.OK).body(apiResponce);
+
         return ResponseEntity.status(HttpStatus.CONFLICT).body(apiResponce);
     }
 
     @DeleteMapping("/deleteDepartment/{id}")
     public HttpEntity<ApiResponce> deleteDepartment(@PathVariable Integer id){
         ApiResponce apiResponce = departmentService.deleteDepartment(id);
+        if (apiResponce.isSuccess())
+            return ResponseEntity.status(HttpStatus.OK).body(apiResponce);
+
         return ResponseEntity.status(HttpStatus.CONFLICT).body(apiResponce);
     }
 }

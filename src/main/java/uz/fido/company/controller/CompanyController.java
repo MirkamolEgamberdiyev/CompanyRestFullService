@@ -18,30 +18,45 @@ public class CompanyController {
     @PostMapping("/addCompany")
     public HttpEntity<ApiResponce> addCompany(@RequestBody CompanyDto companyDto) {
         ApiResponce apiResponce = companyService.addCompany(companyDto);
+        if (apiResponce.isSuccess())
+            return ResponseEntity.status(HttpStatus.OK).body(apiResponce);
+
         return ResponseEntity.status(HttpStatus.CONFLICT).body(apiResponce);
     }
 
     @GetMapping("/getOneCompany/{id}")
     public HttpEntity<ApiResponce> getOneCompany(@PathVariable Integer id) {
-        ApiResponce oneAddress = companyService.getOneCompany(id);
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(oneAddress);
+        ApiResponce apiResponce = companyService.getOneCompany(id);
+        if (apiResponce.isSuccess())
+            return ResponseEntity.status(HttpStatus.OK).body(apiResponce);
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(apiResponce);
     }
 
     @GetMapping("/getAllCompany")
     public HttpEntity<ApiResponce> getAllCompany() {
-        ApiResponce allAddress = companyService.getAllCompany();
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(allAddress);
+        ApiResponce apiResponce = companyService.getAllCompany();
+        if (apiResponce.isSuccess())
+            return ResponseEntity.status(HttpStatus.OK).body(apiResponce);
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(apiResponce);
     }
 
     @PutMapping("/updateCompany/{id}")
     public HttpEntity<ApiResponce> updateCompany(@PathVariable Integer id, @RequestBody CompanyDto companyDto) {
         ApiResponce apiResponce = companyService.updateCompany(id, companyDto);
+        if (apiResponce.isSuccess())
+            return ResponseEntity.status(HttpStatus.OK).body(apiResponce);
+
         return ResponseEntity.status(HttpStatus.CONFLICT).body(apiResponce);
     }
 
     @DeleteMapping("/deleteCompany/{id}")
-    public HttpEntity<ApiResponce> deleteCompany(@PathVariable Integer id){
+    public HttpEntity<ApiResponce> deleteCompany(@PathVariable Integer id) {
         ApiResponce apiResponce = companyService.deleteCompany(id);
+        if (apiResponce.isSuccess())
+            return ResponseEntity.status(HttpStatus.OK).body(apiResponce);
+
         return ResponseEntity.status(HttpStatus.CONFLICT).body(apiResponce);
     }
 }
